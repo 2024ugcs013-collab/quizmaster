@@ -7,7 +7,6 @@
   box-sizing: border-box;
 }
 
-/* ✅ FIX 1: allow scrolling */
 body {
   background: linear-gradient(-45deg, #ff9a9e, #fad0c4, #fbc2eb, #a6c1ee);
   background-size: 400% 400%;
@@ -18,7 +17,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  overflow-y: auto; /* FIXED */
+  overflow: hidden;
 }
 
 @keyframes gradientShift {
@@ -27,12 +26,11 @@ body {
   100% { background-position: 0% 50%; }
 }
 
-/* ✅ FIX 2: relative positioning + flexible height */
+/* ================= CONTAINER ================= */
 .container {
-  position: relative; /* IMPORTANT */
+  position: relative; /* 🔥 REQUIRED */
   width: 90%;
   max-width: 600px;
-  min-height: 420px; /* instead of fixed height */
   background: rgba(255, 255, 255, 0.15);
   backdrop-filter: blur(15px);
   border-radius: 20px;
@@ -40,7 +38,6 @@ body {
   padding: 30px;
   text-align: center;
   animation: fadeIn 1s ease;
-  overflow: visible; /* IMPORTANT */
 }
 
 @keyframes fadeIn {
@@ -48,6 +45,26 @@ body {
   to { opacity: 1; transform: scale(1); }
 }
 
+/* Floating glow (FIXED – does NOT block clicks) */
+.container::before {
+  content: '';
+  position: absolute;
+  top: -100px;
+  left: -100px;
+  width: 200px;
+  height: 200px;
+  background: radial-gradient(circle, #ffffff44 10%, transparent 60%);
+  border-radius: 50%;
+  animation: floatGlow 6s ease-in-out infinite alternate;
+  pointer-events: none; /* 🔥 FIX */
+}
+
+@keyframes floatGlow {
+  0% { transform: translate(0, 0); opacity: 0.6; }
+  100% { transform: translate(50px, 50px); opacity: 1; }
+}
+
+/* ================= HEADINGS ================= */
 h1, h2 {
   font-weight: 700;
   margin-bottom: 15px;
@@ -57,18 +74,18 @@ span {
   color: #ffe47a;
 }
 
+/* ================= BUTTONS ================= */
 button {
   background: linear-gradient(45deg, #ff8a00, #e52e71);
   border: none;
   border-radius: 10px;
   padding: 12px 25px;
-  margin: 10px auto;
+  margin: 10px;
   font-size: 1rem;
   color: #fff;
   cursor: pointer;
   transition: 0.3s;
   box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-  display: block; /* better centering */
 }
 
 button:hover {
@@ -76,6 +93,7 @@ button:hover {
   box-shadow: 0 6px 15px rgba(0,0,0,0.3);
 }
 
+/* ================= VISIBILITY ================= */
 .hidden {
   display: none;
 }
@@ -84,7 +102,7 @@ button:hover {
   display: block;
 }
 
-/* Category Buttons */
+/* ================= CATEGORY ================= */
 .category-buttons {
   display: flex;
   flex-wrap: wrap;
@@ -96,7 +114,7 @@ button:hover {
   width: 45%;
 }
 
-/* Quiz Section */
+/* ================= QUIZ ================= */
 .quiz-header {
   display: flex;
   justify-content: space-between;
@@ -105,7 +123,7 @@ button:hover {
 }
 
 .timer {
-  background: rgba(0,0,0,0.2);
+  background: rgba(0,0,0,0.25);
   padding: 8px 15px;
   border-radius: 12px;
 }
@@ -115,7 +133,6 @@ button:hover {
   padding: 20px;
   border-radius: 15px;
   margin-bottom: 20px;
-  box-shadow: 0 0 10px rgba(255,255,255,0.2);
 }
 
 #options {
@@ -125,7 +142,7 @@ button:hover {
 }
 
 .option {
-  background: rgba(0,0,0,0.2);
+  background: rgba(0,0,0,0.25);
   padding: 12px;
   border-radius: 10px;
   cursor: pointer;
@@ -145,7 +162,7 @@ button:hover {
   background: rgba(255,0,0,0.4);
 }
 
-/* Progress Bar */
+/* ================= PROGRESS ================= */
 .progress {
   background: rgba(255,255,255,0.3);
   border-radius: 10px;
@@ -161,7 +178,25 @@ button:hover {
   transition: width 0.4s ease;
 }
 
-/* Result Section */
+/* ================= NEXT BUTTON ================= */
+#nextBtn {
+  display: none;
+  background: linear-gradient(45deg, #00c6ff, #0072ff);
+  font-weight: 600;
+}
+
+#nextBtn.show {
+  display: inline-block;
+  margin-top: 10px;
+  animation: popIn 0.4s ease;
+}
+
+@keyframes popIn {
+  from { transform: scale(0.8); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+/* ================= RESULT ================= */
 #result h2 {
   font-size: 2rem;
 }
@@ -175,45 +210,7 @@ button:hover {
   color: #7affb1;
 }
 
-/* Floating glow animation */
-.container::before {
-  content: '';
-  position: absolute;
-  top: -100px;
-  left: -100px;
-  width: 200px;
-  height: 200px;
-  background: radial-gradient(circle, #fff4 10%, transparent 60%);
-  border-radius: 50%;
-  animation: floatGlow 6s ease-in-out infinite alternate;
-  z-index: -1;
-}
-
-@keyframes floatGlow {
-  0% { transform: translate(0, 0); opacity: 0.7; }
-  100% { transform: translate(50px, 50px); opacity: 1; }
-}
-
-/* ✅ FIX 3: Next button ALWAYS visible when active */
-#nextBtn {
-  display: none;
-  background: linear-gradient(45deg, #00c6ff, #0072ff);
-  font-weight: 600;
-  letter-spacing: 0.5px;
-  margin: 20px auto 0;
-}
-
-#nextBtn.show {
-  display: block;
-  animation: popIn 0.4s ease;
-}
-
-@keyframes popIn {
-  from { transform: scale(0.8); opacity: 0; }
-  to { transform: scale(1); opacity: 1; }
-}
-
-/* Username Section */
+/* ================= USERNAME ================= */
 #usernameInput {
   width: 80%;
   padding: 12px;
@@ -225,7 +222,7 @@ button:hover {
   text-align: center;
 }
 
-/* Leaderboard */
+/* ================= LEADERBOARD ================= */
 #leaderboardList {
   list-style: none;
   padding: 0;
