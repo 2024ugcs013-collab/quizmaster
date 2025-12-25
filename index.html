@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>QuizMaster Pro</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="container">
+
+    <!-- 🏠 Home Section -->
+    <section id="home" class="active">
+      <h1>Welcome to <span>QuizMaster Pro</span></h1>
+      <p>Test your knowledge across different categories!</p>
+      <button id="startBtn">Start Quiz</button>
+    </section>
+    <!-- 👤 Username Section -->
+<section id="usernameSection" class="hidden">
+  <h2>Enter Your Name</h2>
+  <input 
+    type="text" 
+    id="usernameInput" 
+    placeholder="Your name..." 
+    autocomplete="off"
+  />
+  <button id="saveUsernameBtn">Continue</button>
+</section>
+
+    <!-- 📚 Category Selection -->
+    <section id="category" class="hidden">
+      <h2>Select Quiz Category</h2>
+      <div class="category-buttons">
+        <button class="categoryBtn" data-category="html">HTML</button>
+        <button class="categoryBtn" data-category="css">CSS</button>
+        <button class="categoryBtn" data-category="javascript">JavaScript</button>
+        <button class="categoryBtn" data-category="general">General Knowledge</button>
+      </div>
+    </section>
+
+    <!-- ❓ Quiz Section -->
+    <section id="quiz" class="hidden">
+      <div class="quiz-header">
+        <h2 id="categoryTitle"></h2>
+        <div class="timer">
+          Time Left: <span id="time">10</span>s
+        </div>
+      </div>
+
+      <div id="questionBox">
+        <h3 id="questionText">Question text here</h3>
+        <div id="options"></div>
+      </div>
+
+      <div class="progress">
+        <div id="progressBar"></div>
+      </div>
+
+      <button id="nextBtn">Next</button>
+    </section>
+
+    <!-- 🏁 Result Section -->
+    <section id="result" class="hidden">
+      <h2>Well Done, <span id="userDisplay"></span>!</h2>
+
+      <p>Your Score: <span id="score"></span> / <span id="total"></span></p>
+      <p>Best Score: <span id="bestScore"></span></p>
+      <h3>🏆 Leaderboard (Top 10)</h3>
+<ul id="leaderboardList"></ul>
+
+      <button id="restartBtn">Play Again</button>
+      <button id="homeBtn">Back to Home</button>
+    </section>
+
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

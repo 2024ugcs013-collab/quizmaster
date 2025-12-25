@@ -1,0 +1,240 @@
+/* 🎨 Modern Quiz App - Animated Gradient Theme */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background: linear-gradient(-45deg, #ff9a9e, #fad0c4, #fbc2eb, #a6c1ee);
+  background-size: 400% 400%;
+  animation: gradientShift 10s ease infinite;
+  font-family: 'Poppins', sans-serif;
+  color: #fff;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+@keyframes gradientShift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.container {
+  width: 90%;
+  max-width: 600px;
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(15px);
+  border-radius: 20px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+  padding: 30px;
+  text-align: center;
+  animation: fadeIn 1s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: scale(0.9); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+h1, h2 {
+  font-weight: 700;
+  margin-bottom: 15px;
+}
+
+span {
+  color: #ffe47a;
+}
+
+button {
+  background: linear-gradient(45deg, #ff8a00, #e52e71);
+  border: none;
+  border-radius: 10px;
+  padding: 12px 25px;
+  margin: 10px;
+  font-size: 1rem;
+  color: #fff;
+  cursor: pointer;
+  transition: 0.3s;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
+
+button:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 15px rgba(0,0,0,0.3);
+}
+
+.hidden {
+  display: none;
+}
+
+.active {
+  display: block;
+}
+
+/* Category Buttons */
+.category-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 15px;
+}
+
+.categoryBtn {
+  width: 45%;
+}
+
+/* Quiz Section */
+.quiz-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.timer {
+  background: rgba(0,0,0,0.2);
+  padding: 8px 15px;
+  border-radius: 12px;
+}
+
+#questionBox {
+  background: rgba(255, 255, 255, 0.1);
+  padding: 20px;
+  border-radius: 15px;
+  margin-bottom: 20px;
+  box-shadow: 0 0 10px rgba(255,255,255,0.2);
+}
+
+#options {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.option {
+  background: rgba(0,0,0,0.2);
+  padding: 12px;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.option:hover {
+  background: rgba(255,255,255,0.2);
+  transform: translateY(-2px);
+}
+
+.correct {
+  background: rgba(0,255,0,0.4);
+}
+
+.wrong {
+  background: rgba(255,0,0,0.4);
+}
+
+/* Progress Bar */
+.progress {
+  background: rgba(255,255,255,0.3);
+  border-radius: 10px;
+  height: 10px;
+  overflow: hidden;
+  margin: 20px 0;
+}
+
+#progressBar {
+  height: 10px;
+  width: 0;
+  background: linear-gradient(45deg, #ff8a00, #e52e71);
+  transition: width 0.4s ease;
+}
+
+/* Result Section */
+#result h2 {
+  font-size: 2rem;
+}
+
+#score {
+  font-weight: 700;
+  color: #ffe47a;
+}
+
+#bestScore {
+  color: #7affb1;
+}
+
+/* Floating glow animation */
+.container::before {
+  content: '';
+  position: absolute;
+  top: -100px;
+  left: -100px;
+  width: 200px;
+  height: 200px;
+  background: radial-gradient(circle, #fff4 10%, transparent 60%);
+  border-radius: 50%;
+  animation: floatGlow 6s ease-in-out infinite alternate;
+}
+
+@keyframes floatGlow {
+  0% { transform: translate(0, 0); opacity: 0.7; }
+  100% { transform: translate(50px, 50px); opacity: 1; }
+}
+
+/* Next Button fix */
+#nextBtn {
+  display: none;
+  background: linear-gradient(45deg, #00c6ff, #0072ff);
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+#nextBtn.show {
+  display: inline-block;
+  margin-top: 10px;
+  animation: popIn 0.4s ease;
+}
+
+@keyframes popIn {
+  from { transform: scale(0.8); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+/* Username Section */
+#usernameInput {
+  width: 80%;
+  padding: 12px;
+  border-radius: 10px;
+  border: none;
+  outline: none;
+  font-size: 1rem;
+  margin: 15px 0;
+  text-align: center;
+}
+/* Leaderboard */
+#leaderboardList {
+  list-style: none;
+  padding: 0;
+  margin-top: 15px;
+}
+
+#leaderboardList li {
+  background: rgba(0,0,0,0.25);
+  margin: 6px 0;
+  padding: 10px;
+  border-radius: 10px;
+  font-weight: 500;
+  display: flex;
+  justify-content: space-between;
+}
