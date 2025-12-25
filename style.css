@@ -7,6 +7,7 @@
   box-sizing: border-box;
 }
 
+/* ✅ FIX 1: allow scrolling */
 body {
   background: linear-gradient(-45deg, #ff9a9e, #fad0c4, #fbc2eb, #a6c1ee);
   background-size: 400% 400%;
@@ -17,24 +18,21 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  overflow: hidden;
+  overflow-y: auto; /* FIXED */
 }
 
 @keyframes gradientShift {
-  0% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
-  100% {
-    background-position: 0% 50%;
-  }
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
 }
 
+/* ✅ FIX 2: relative positioning + flexible height */
 .container {
+  position: relative; /* IMPORTANT */
   width: 90%;
   max-width: 600px;
+  min-height: 420px; /* instead of fixed height */
   background: rgba(255, 255, 255, 0.15);
   backdrop-filter: blur(15px);
   border-radius: 20px;
@@ -42,6 +40,7 @@ body {
   padding: 30px;
   text-align: center;
   animation: fadeIn 1s ease;
+  overflow: visible; /* IMPORTANT */
 }
 
 @keyframes fadeIn {
@@ -63,12 +62,13 @@ button {
   border: none;
   border-radius: 10px;
   padding: 12px 25px;
-  margin: 10px;
+  margin: 10px auto;
   font-size: 1rem;
   color: #fff;
   cursor: pointer;
   transition: 0.3s;
   box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+  display: block; /* better centering */
 }
 
 button:hover {
@@ -186,6 +186,7 @@ button:hover {
   background: radial-gradient(circle, #fff4 10%, transparent 60%);
   border-radius: 50%;
   animation: floatGlow 6s ease-in-out infinite alternate;
+  z-index: -1;
 }
 
 @keyframes floatGlow {
@@ -193,17 +194,17 @@ button:hover {
   100% { transform: translate(50px, 50px); opacity: 1; }
 }
 
-/* Next Button fix */
+/* ✅ FIX 3: Next button ALWAYS visible when active */
 #nextBtn {
   display: none;
   background: linear-gradient(45deg, #00c6ff, #0072ff);
   font-weight: 600;
   letter-spacing: 0.5px;
+  margin: 20px auto 0;
 }
 
 #nextBtn.show {
-  display: inline-block;
-  margin-top: 10px;
+  display: block;
   animation: popIn 0.4s ease;
 }
 
@@ -211,6 +212,7 @@ button:hover {
   from { transform: scale(0.8); opacity: 0; }
   to { transform: scale(1); opacity: 1; }
 }
+
 /* Username Section */
 #usernameInput {
   width: 80%;
@@ -222,6 +224,7 @@ button:hover {
   margin: 15px 0;
   text-align: center;
 }
+
 /* Leaderboard */
 #leaderboardList {
   list-style: none;
